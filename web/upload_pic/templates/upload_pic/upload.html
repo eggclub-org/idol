@@ -1,0 +1,20 @@
+
+
+{% load static %}
+
+{% block content %}
+  <img id="up-img" src="https://blog.stylingandroid.com/wp-content/themes/lontano-pro/images/no-image-slide.png"
+       height="400" alt="No image">
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input id="image-to-upload" type="file" name="idol_pic"
+    onchange="document.getElementById('up-img').src = window.URL.createObjectURL(this.files[0])">
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if uploaded_image_url %}
+    <p>Image uploaded. <a href="{{ uploaded_image_url }}" target="_blank">Open Image in a new tab.</a></p>
+  {% endif %}
+
+{% endblock %}

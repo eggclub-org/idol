@@ -1,0 +1,70 @@
+<head>
+    <title>Idol Detect</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>Nhận diện JAV idols</h1>
+
+        <h3>Upload an image of your idol...</h3>
+        <img id="up-img" src= {{ image_url }} height="400" alt="No image">
+
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <input id="image-to-upload" type="file" name="idol_pic"
+                   onchange="document.getElementById('up-img').src = window.URL.createObjectURL(this.files[0])">
+            <button type="submit">Upload</button>
+        </form>
+
+        {% if info_idol %}
+            <h2>Info of <big>{{ info_idol.name }}</big></h2>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Birthday</th>
+                        <th class="text-center">Height</th>
+                        <th class="text-center">V1</th>
+                        <th class="text-center">V2</th>
+                        <th class="text-center">V3</th>
+{#                        <th class="text-center">List film</th>#}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">{{ info_idol.name }}</td>
+                        <td class="text-center">{{ info_idol.birthday }}</td>
+                        <td class="text-center">{{ info_idol.height }}</td>
+                        <td class="text-center">{{ info_idol.v1 }}</td>
+                        <td class="text-center">{{ info_idol.v2 }}</td>
+                        <td class="text-center">{{ info_idol.v3 }}</td>
+{#                        <td>{{ info_idol.list_film }}</td>#}
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <h2>Recommended fiml</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">List film</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ info_idol.list_film }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+{% endblock %}

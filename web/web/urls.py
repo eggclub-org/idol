@@ -23,6 +23,7 @@ from upload_pic import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^upload/', views.upload_pic),
+    url(r'^$', views.upload_pic)
 ]
 
 if settings.DEBUG:
